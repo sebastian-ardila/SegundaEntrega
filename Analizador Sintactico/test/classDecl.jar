@@ -1,0 +1,12 @@
+class identificador9{ 
+	int hola(int jaja, int jojo){
+		int n, m = 3;
+		string f, b = "4";
+
+		while(true)
+			n = m;
+			break;
+		}
+	}
+
+	

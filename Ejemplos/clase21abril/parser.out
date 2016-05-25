@@ -1,0 +1,81 @@
+
+
+Unused terminals:
+
+
+Grammar
+
+Rule 1     A -> ID
+Rule 2     A -> PARENIZQ A PARENDER
+
+Terminals, with rules where they appear
+
+ID                   : 1
+PARENDER             : 2
+PARENIZQ             : 2
+error                : 
+
+Nonterminals, with rules where they appear
+
+A                    : 2 0
+
+
+Parsing method: SLR
+
+
+state 0
+
+    (0) S' -> . A
+    (1) A -> . ID
+    (2) A -> . PARENIZQ A PARENDER
+
+    ID              shift and go to state 2
+    PARENIZQ        shift and go to state 3
+
+
+    A                              shift and go to state 1
+
+state 1
+
+    (0) S' -> A .
+
+
+
+
+state 2
+
+    (1) A -> ID .
+
+    $end            reduce using rule 1 (A -> ID .)
+    PARENDER        reduce using rule 1 (A -> ID .)
+
+
+
+state 3
+
+    (2) A -> PARENIZQ . A PARENDER
+    (1) A -> . ID
+    (2) A -> . PARENIZQ A PARENDER
+
+    ID              shift and go to state 2
+    PARENIZQ        shift and go to state 3
+
+
+    A                              shift and go to state 4
+
+state 4
+
+    (2) A -> PARENIZQ A . PARENDER
+
+    PARENDER        shift and go to state 5
+
+
+
+state 5
+
+    (2) A -> PARENIZQ A PARENDER .
+
+    $end            reduce using rule 2 (A -> PARENIZQ A PARENDER .)
+    PARENDER        reduce using rule 2 (A -> PARENIZQ A PARENDER .)
+
+

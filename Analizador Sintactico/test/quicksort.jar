@@ -1,0 +1,24 @@
+class Clase1{
+   int a,b;
+   int getB(){
+  	  int uno,dos;
+
+      uno = 1;
+  }
+}
+
+class Clase3{
+  string bc,de;
+   int getC(){
+  	int dos,tres;
+    dos = 2;
+  }
+}
+
+class Clase3{
+  int variable1,variable2;
+  int getB(){
+  	int dos,tres;
+    tres = 3;
+  }
+}

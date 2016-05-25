@@ -1,0 +1,15 @@
+class Clase3{
+   boolean a,b;
+   string c,d;
+   int getB(){
+  	  int uno,dos;
+      uno = 1;
+      while(expr1.id > 2)
+      	new id2 ()
+      	break;
+      while(new type [id.length])
+      	break;
+      while(-id3)
+      	break;
+  }
+}

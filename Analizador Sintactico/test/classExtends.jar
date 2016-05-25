@@ -1,0 +1,8 @@
+class Clase1 extends hola{
+   boolean a,b;
+   int getB(){
+  	  int uno,dos;
+
+      uno = 1;
+  }
+}

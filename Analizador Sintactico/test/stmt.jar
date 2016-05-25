@@ -1,0 +1,18 @@
+class Clase1 extends hola{
+   boolean a,b;
+
+   int getB(){
+  	  int uno,dos;
+
+      uno = 1;
+      metodo1(expr1, expr2.length);
+      metodo2(expr3, id1 + id2);
+      return this;
+      if (this) 
+      break;
+      else
+      continue;
+
+  }
+
+}

@@ -1,0 +1,340 @@
+
+
+Unused terminals:
+
+   RETURN
+   NUMBER
+   PLUS
+   TIMES
+   MINUS
+   DIVIDE
+
+Grammar
+
+Rule 1     Program -> DeclList
+Rule 2     DeclList -> ClassDecl DeclList
+Rule 3     DeclList -> empty
+Rule 4     ClassDecl -> CLASS ID { FieldDecl MethDecl }
+Rule 5     FieldDecl -> Type ID ;
+Rule 6     MethDecl -> Type ID ( ) { Body }
+Rule 7     Body -> FieldDecl Statement
+Rule 8     Statement -> ID ;
+Rule 9     Type -> INTEGER
+Rule 10    Type -> STRING
+Rule 11    Type -> ID
+Rule 12    empty -> <empty>
+
+Terminals, with rules where they appear
+
+(                    : 6
+)                    : 6
+;                    : 5 8
+CLASS                : 4
+DIVIDE               : 
+ID                   : 4 5 6 8 11
+INTEGER              : 9
+MINUS                : 
+NUMBER               : 
+PLUS                 : 
+RETURN               : 
+STRING               : 10
+TIMES                : 
+error                : 
+{                    : 4 6
+}                    : 4 6
+
+Nonterminals, with rules where they appear
+
+Body                 : 6
+ClassDecl            : 2
+DeclList             : 1 2
+FieldDecl            : 4 7
+MethDecl             : 4
+Program              : 0
+Statement            : 7
+Type                 : 5 6
+empty                : 3
+
+
+Parsing method: SLR
+
+
+state 0
+
+    (0) S' -> . Program
+    (1) Program -> . DeclList
+    (2) DeclList -> . ClassDecl DeclList
+    (3) DeclList -> . empty
+    (4) ClassDecl -> . CLASS ID { FieldDecl MethDecl }
+    (12) empty -> .
+
+    CLASS           shift and go to state 3
+    $end            reduce using rule 12 (empty -> .)
+
+
+    DeclList                       shift and go to state 1
+    ClassDecl                      shift and go to state 2
+    Program                        shift and go to state 4
+    empty                          shift and go to state 5
+
+state 1
+
+    (1) Program -> DeclList .
+
+    $end            reduce using rule 1 (Program -> DeclList .)
+
+
+
+state 2
+
+    (2) DeclList -> ClassDecl . DeclList
+    (2) DeclList -> . ClassDecl DeclList
+    (3) DeclList -> . empty
+    (4) ClassDecl -> . CLASS ID { FieldDecl MethDecl }
+    (12) empty -> .
+
+    CLASS           shift and go to state 3
+    $end            reduce using rule 12 (empty -> .)
+
+
+    DeclList                       shift and go to state 6
+    ClassDecl                      shift and go to state 2
+    empty                          shift and go to state 5
+
+state 3
+
+    (4) ClassDecl -> CLASS . ID { FieldDecl MethDecl }
+
+    ID              shift and go to state 7
+
+
+
+state 4
+
+    (0) S' -> Program .
+
+
+
+
+state 5
+
+    (3) DeclList -> empty .
+
+    $end            reduce using rule 3 (DeclList -> empty .)
+
+
+
+state 6
+
+    (2) DeclList -> ClassDecl DeclList .
+
+    $end            reduce using rule 2 (DeclList -> ClassDecl DeclList .)
+
+
+
+state 7
+
+    (4) ClassDecl -> CLASS ID . { FieldDecl MethDecl }
+
+    {               shift and go to state 8
+
+
+
+state 8
+
+    (4) ClassDecl -> CLASS ID { . FieldDecl MethDecl }
+    (5) FieldDecl -> . Type ID ;
+    (9) Type -> . INTEGER
+    (10) Type -> . STRING
+    (11) Type -> . ID
+
+    INTEGER         shift and go to state 13
+    STRING          shift and go to state 10
+    ID              shift and go to state 12
+
+
+    FieldDecl                      shift and go to state 11
+    Type                           shift and go to state 9
+
+state 9
+
+    (5) FieldDecl -> Type . ID ;
+
+    ID              shift and go to state 14
+
+
+
+state 10
+
+    (10) Type -> STRING .
+
+    ID              reduce using rule 10 (Type -> STRING .)
+
+
+
+state 11
+
+    (4) ClassDecl -> CLASS ID { FieldDecl . MethDecl }
+    (6) MethDecl -> . Type ID ( ) { Body }
+    (9) Type -> . INTEGER
+    (10) Type -> . STRING
+    (11) Type -> . ID
+
+    INTEGER         shift and go to state 13
+    STRING          shift and go to state 10
+    ID              shift and go to state 12
+
+
+    Type                           shift and go to state 15
+    MethDecl                       shift and go to state 16
+
+state 12
+
+    (11) Type -> ID .
+
+    ID              reduce using rule 11 (Type -> ID .)
+
+
+
+state 13
+
+    (9) Type -> INTEGER .
+
+    ID              reduce using rule 9 (Type -> INTEGER .)
+
+
+
+state 14
+
+    (5) FieldDecl -> Type ID . ;
+
+    ;               shift and go to state 17
+
+
+
+state 15
+
+    (6) MethDecl -> Type . ID ( ) { Body }
+
+    ID              shift and go to state 18
+
+
+
+state 16
+
+    (4) ClassDecl -> CLASS ID { FieldDecl MethDecl . }
+
+    }               shift and go to state 19
+
+
+
+state 17
+
+    (5) FieldDecl -> Type ID ; .
+
+    INTEGER         reduce using rule 5 (FieldDecl -> Type ID ; .)
+    STRING          reduce using rule 5 (FieldDecl -> Type ID ; .)
+    ID              reduce using rule 5 (FieldDecl -> Type ID ; .)
+
+
+
+state 18
+
+    (6) MethDecl -> Type ID . ( ) { Body }
+
+    (               shift and go to state 20
+
+
+
+state 19
+
+    (4) ClassDecl -> CLASS ID { FieldDecl MethDecl } .
+
+    CLASS           reduce using rule 4 (ClassDecl -> CLASS ID { FieldDecl MethDecl } .)
+    $end            reduce using rule 4 (ClassDecl -> CLASS ID { FieldDecl MethDecl } .)
+
+
+
+state 20
+
+    (6) MethDecl -> Type ID ( . ) { Body }
+
+    )               shift and go to state 21
+
+
+
+state 21
+
+    (6) MethDecl -> Type ID ( ) . { Body }
+
+    {               shift and go to state 22
+
+
+
+state 22
+
+    (6) MethDecl -> Type ID ( ) { . Body }
+    (7) Body -> . FieldDecl Statement
+    (5) FieldDecl -> . Type ID ;
+    (9) Type -> . INTEGER
+    (10) Type -> . STRING
+    (11) Type -> . ID
+
+    INTEGER         shift and go to state 13
+    STRING          shift and go to state 10
+    ID              shift and go to state 12
+
+
+    Body                           shift and go to state 23
+    FieldDecl                      shift and go to state 24
+    Type                           shift and go to state 9
+
+state 23
+
+    (6) MethDecl -> Type ID ( ) { Body . }
+
+    }               shift and go to state 25
+
+
+
+state 24
+
+    (7) Body -> FieldDecl . Statement
+    (8) Statement -> . ID ;
+
+    ID              shift and go to state 26
+
+
+    Statement                      shift and go to state 27
+
+state 25
+
+    (6) MethDecl -> Type ID ( ) { Body } .
+
+    }               reduce using rule 6 (MethDecl -> Type ID ( ) { Body } .)
+
+
+
+state 26
+
+    (8) Statement -> ID . ;
+
+    ;               shift and go to state 28
+
+
+
+state 27
+
+    (7) Body -> FieldDecl Statement .
+
+    }               reduce using rule 7 (Body -> FieldDecl Statement .)
+
+
+
+state 28
+
+    (8) Statement -> ID ; .
+
+    }               reduce using rule 8 (Statement -> ID ; .)
+
+

@@ -1,0 +1,8 @@
+class Clase3{
+   boolean a,b;
+   string c,d;
+   int getB(){
+  	  int uno,dos;
+      uno = 1;
+  }
+}
